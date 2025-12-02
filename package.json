@@ -1,6 +1,6 @@
 {
   "name": "my-app",
-  "version": "0.1.0",
+  "version": "0.1.0-SNAPSHOT.1",
   "private": false,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
