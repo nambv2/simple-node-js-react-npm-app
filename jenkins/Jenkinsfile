@@ -8,6 +8,7 @@ pipeline {
     }
     environment {
         CI = 'true'
+        HOME = "${env.WORKSPACE}"
     }
     stages {
         stage('Build') {
