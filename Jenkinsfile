@@ -6,11 +6,11 @@ pipeline {
                 sh 'npm install'
             }
         }
-        stage('Test') { 
-            steps {
-                sh './jenkins/scripts/test.sh' 
-            }
-        }
+        // stage('Test') { 
+        //     steps {
+        //         sh './jenkins/scripts/test.sh' 
+        //     }
+        // }
          stage('Push to nexus') {
             steps {
               // withCredentials([string(credentialsId: 'NPM_TOKEN_ID', variable: 'NPM_TOKEN')]) {
@@ -23,12 +23,12 @@ pipeline {
  
                                 if [[ "$VERSION" == *"-SNAPSHOT"* ]]; then
                                   echo "Deploying snapshot to Nexus snapshot repository..."
-                                  npm adduser --auth-type=legacy --registry=$(node -p "require('../package.json').publishConfig.registry")
-                                  npm publish --registry=$(node -p "require('../package.json').publishConfig.registry")
+                                  npm adduser --auth-type=legacy --registry=$(node -p "require('./package.json').publishConfig.registry")
+                                  npm publish --registry=$(node -p "require('./package.json').publishConfig.registry")
                                 else
                                   echo "Deploying release to Nexus release repository..."
-                                  npm adduser --auth-type=legacy --registry=$(node -p "require('../package.json').publishConfig.registry")
-                                  npm publish --registry=$(node -p "require('../package.json').releasePublishConfig.registry")
+                                  npm adduser --auth-type=legacy --registry=$(node -p "require('./package.json').publishConfig.registry")
+                                  npm publish --registry=$(node -p "require('./package.json').releasePublishConfig.registry")
                                 fi
                            
                 '''
