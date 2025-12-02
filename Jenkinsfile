@@ -13,16 +13,18 @@ pipeline {
         // }
          stage('Push to nexus') {
             steps {
-              // withCredentials([string(credentialsId: 'NPM_TOKEN_ID', variable: 'NPM_TOKEN')]) {
-              //   sh 'npm config set //registry.npmjs.org/:_authToken ${NPM_TOKEN}' // Or your private registry URL
-              //   sh 'npm install'
-              
-              //    }
-            //   sh '''
-                                
-                           
-            //     '''
-            sh './detect.sh' 
+              sh '''  #!/bin/bash
+VERSION=$(node -p "require(\'./package.json\').version")
+                if  [["$VERSION" == *"-SNAPSHOT"* ]]; then
+                  echo "Deploying snapshot to Nexus snapshot repository..."
+                  npm adduser --auth-type=legacy --registry=$(node -p "require(\'./package.json\').publishConfig.registry")
+                  npm publish --registry=$(node -p "require(\'./package.json\').publishConfig.registry")
+                else
+                  echo "Deploying release to Nexus release repository..."
+                  npm adduser --auth-type=legacy --registry=$(node -p "require(\'./package.json\').releasePublishConfig.registry")
+                  npm publish --registry=$(node -p "require(\'./package.json\').releasePublishConfig.registry")
+                fi'''
+            // sh './detect.sh' 
             }
         }
     }
