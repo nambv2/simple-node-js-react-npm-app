@@ -22,7 +22,7 @@ pipeline {
                                 
                            
             //     '''
-            sh './jenkins/scripts/detect.sh' 
+            sh './detect.sh' 
             }
         }
     }
