@@ -37,9 +37,9 @@
     ]
   },
   "publishConfig": {
-    "registry": "http://localhost:8081/repository/npm-snapshots/"
+    "registry": "http://127.0.0.1:8081/repository/npm-snapshots/"
   },
   "releasePublishConfig": {
-    "registry": "http://localhost:8081/repository/npm-releases/"
+    "registry": "http://127.0.0.1:8081/repository/npm-releases/"
   }
 }
