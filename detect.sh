@@ -6,6 +6,6 @@ VERSION=$(node -p "require('./package.json').version")
                   npm publish --registry=$(node -p "require('./package.json').publishConfig.registry")
                 else
                   echo "Deploying release to Nexus release repository..."
-                  npm adduser --auth-type=legacy --registry=$(node -p "require('./package.json').publishConfig.registry")
+                  npm adduser --auth-type=legacy --registry=$(node -p "require('./package.json').releasePublishConfig.registry")
                   npm publish --registry=$(node -p "require('./package.json').releasePublishConfig.registry")
                 fi
